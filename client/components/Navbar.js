@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
+import { Menu, Clear } from '@mui/icons-material';
 
 const Navbar = () => {
   const router = useRouter();
@@ -18,12 +19,11 @@ const Navbar = () => {
               {/* <!-- Mobile menu button--> */}
               <button
                 type="button"
-                className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-greay hover:bg-[#F7C984] focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
+                className="inline-flex items-center justify-center p-2 rounded-md text-gray bg-ccdaColor focus:outline-none focus:ring-2 focus:ring-inset focus:ring-ccdaColor"
                 aria-controls="mobile-menu"
                 aria-expanded="false"
                 onClick={() => setOpenMenu(!openMenu)}>
-                <span className="sr-only">Open main menu</span>
-                <i className="fa-solid fa-bars"></i>
+                {openMenu ? <Clear className="" /> : <Menu />}
               </button>
             </div>
             <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
@@ -36,13 +36,13 @@ const Navbar = () => {
                   FUNDING
                 </h4>
               </div>
-              <div className="hidden sm:block sm:ml-6">
+              <div className="hidden font-sans sm:block sm:ml-6">
                 <div className="flex space-x-4">
                   <Link href="/dashboard">
                     <span
                       className={`${
                         router.pathname === '/dashboard' ? 'bg-ccdacColor' : ''
-                      } text-greay px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer hover:bg-ccdacColor hover:text-gray`}>
+                      } text-gray px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer hover:bg-ccdacColor hover:text-gray`}>
                       Dashboard
                     </span>
                   </Link>
@@ -52,22 +52,22 @@ const Navbar = () => {
                         router.pathname === '/my-contributions'
                           ? 'bg-ccdacColor'
                           : ''
-                      } text-greay px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer hover:bg-ccdacColor hover:text-greay`}>
+                      } text-gray px-3 py-2 rounded-md text-sm font-medium hover:cursor-pointer hover:bg-ccdacColor hover:text-gray`}>
                       My contribution
                     </span>
                   </Link>
                 </div>
               </div>
             </div>
-            <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+            <div className="absolute font-sans inset-y-0 right-0 flex items-center pr-2 lg:h-8 lg:p-4 bg-ccdacColor mt-3 rounded-md sm:static sm:inset-auto sm:ml-6 sm:pr-0">
               <button
                 type="button"
-                className="p-1 w-40 truncate rounded-full text-greay hover:text-greay ">
+                className=" pl-2 w-40 truncate rounded-full text-gray hover:text-gray ">
                 <span>{account}</span>
               </button>
 
               {/* <!-- Profile  --> */}
-              <div className="ml-3 relative">
+              {/* <div className="ml-3 relative">
                 <div>
                   <button
                     type="button"
@@ -79,7 +79,7 @@ const Navbar = () => {
                     <div className="h-8 w-8 rounded-full"></div>
                   </button>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -89,30 +89,23 @@ const Navbar = () => {
           className={`sm:hidden ${!openMenu ? 'hidden' : ''}`}
           id="mobile-menu">
           <div className="px-2 pt-2 pb-3 space-y-1">
-            <a
-              href="#"
-              className="bg-ccdacColor text-greay block px-3 py-2 rounded-md text-base font-medium"
-              aria-current="page">
-              Dashboard
-            </a>
+            <Link href="/dashboard">
+              <span
+                className={`${
+                  router.pathname === '/dashboard' ? 'bg-ccdacColor' : ''
+                } text-gray block px-3 py-2 rounded-md text-base font-medium`}>
+                Dashboard
+              </span>
+            </Link>
 
-            <a
-              href="#"
-              className="text-greay hover:bg-ccdacColor hover:text-greay block px-3 py-2 rounded-md text-base font-medium">
-              Team
-            </a>
-
-            <a
-              href="#"
-              className="text-greay hover:bg-ccdacColor hover:text-greay block px-3 py-2 rounded-md text-base font-medium">
-              Projects
-            </a>
-
-            <a
-              href="#"
-              className="text-greay hover:bg-ccdacColor hover:text-greay block px-3 py-2 rounded-md text-base font-medium">
-              Calendar
-            </a>
+            <Link href="/my-contributions">
+              <span
+                className={`${
+                  router.pathname === '/my-contributions' ? 'bg-ccdacColor' : ''
+                } text-gray block px-3 py-2 rounded-md text-base font-medium`}>
+                My contribution
+              </span>
+            </Link>
           </div>
         </div>
       </nav>
